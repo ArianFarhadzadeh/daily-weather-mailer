@@ -1,0 +1,30 @@
+name: Daily Weather Report
+
+on:
+  schedule:
+    - cron: '30 3 * * *'  # معادل 8:00 صبح ایران (IRDT = UTC+4:30)
+  workflow_dispatch:
+
+jobs:
+  send-weather:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run weather script
+        env:
+          EMAIL_SENDER: ${{ secrets.EMAIL_SENDER }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          EMAIL_RECEIVER: ${{ secrets.EMAIL_RECEIVER }}
+        run: |
+          python3 weather.py
