@@ -6,9 +6,10 @@ from email.header import Header
 import datetime
 
 # Email settings
-EMAIL_SENDER = "ugly.black.james@gmail.com"  # Sender's email
-EMAIL_PASSWORD = "gqqk mzuu esfp adzv"  # Gmail app password
-EMAIL_RECEIVER = "Arianf363@gmail.com"  # Receiver's email
+
+EMAIL_SENDER = os.environ["EMAIL_SENDER"]
+EMAIL_PASSWORD = os.environ["EMAIL_PASSWORD"]
+EMAIL_RECEIVER = os.environ["EMAIL_RECEIVER"]
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
 
