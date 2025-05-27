@@ -20,7 +20,7 @@ CITIES = {
     "New York-USA": {"lat": 40.7128, "lon": -74.0060},
     "Dallas-USA": {"lat": 32.7767, "lon": -96.7970},
     "Houston-USA": {"lat": 29.7604, "lon": -95.3698},
-    "Austin-USA": {"lat": 30.2672, "lon": -97.7431}
+    "Austin-USA": {"lat": 30.2672, "lon": -97.7431},
     "Bochum-DE" : {"lat":51.45972109228949,"lon": 7.234279823365569}
 }
 
