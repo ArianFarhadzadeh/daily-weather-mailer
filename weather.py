@@ -40,30 +40,30 @@ def get_weather(city, lat, lon):
 def weather_code_to_description(code):
     """Convert weather code to textual description"""
     weather_codes = {
-        0: "Clear sky",
-        1: "Mainly clear",
-        2: "Partly cloudy",
-        3: "Overcast",
-        45: "Fog",
-        48: "Fog and freezing",
-        51: "Light drizzle",
-        53: "Moderate drizzle",
-        55: "Heavy drizzle",
-        61: "Light rain",
-        63: "Moderate rain",
-        65: "Heavy rain",
-        71: "Light snow",
-        73: "Moderate snow",
-        75: "Heavy snow",
-        80: "Rain showers: light",
-        81: "Rain showers: moderate",
-        82: "Rain showers: violent",
-        95: "Thunderstorm",
-        96: "Thunderstorm with hail",
-        99: "Thunderstorm with heavy hail"
+        0: "Clear sky ☀️",
+        1: "Mainly clear 🌤️",
+        2: "Partly cloudy ⛅",
+        3: "Overcast ☁️",
+        45: "Fog 🌫️",
+        48: "Fog and freezing ❄️🌫️",
+        51: "Light drizzle 🌧️",
+        53: "Moderate drizzle 🌧️",
+        55: "Heavy drizzle 🌧️",
+        61: "Light rain ☔",
+        63: "Moderate rain ☔",
+        65: "Heavy rain ☔",
+        71: "Light snow 🌨️",
+        73: "Moderate snow 🌨️",
+        75: "Heavy snow 🌨️",
+        80: "Rain showers: light 🌧️",
+        81: "Rain showers: moderate 🌧️",
+        82: "Rain showers: violent ⛈️",
+        95: "Thunderstorm ⚡⛈️",
+        96: "Thunderstorm with hail ⚡🌨️🧊",
+        99: "Thunderstorm with heavy hail ⚡🌨️🧊"
     }
-    return weather_codes.get(code, "Unknown")
-
+    return weather_codes.get(code, "Unknown ❓")
+    
 def send_email(weather_data):
     """Send email with weather information"""
     subject = f"Weather Report - {datetime.date.today()}"
