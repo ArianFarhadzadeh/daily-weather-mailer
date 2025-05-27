@@ -15,12 +15,13 @@ SMTP_PORT = 587
 
 # City coordinates (lat, lon)
 CITIES = {
-    "Tehran": {"lat": 35.6892, "lon": 51.3890},
-    "Mashhad": {"lat": 36.2970, "lon": 59.6057},
-    "New York": {"lat": 40.7128, "lon": -74.0060},
-    "Dallas": {"lat": 32.7767, "lon": -96.7970},
-    "Houston": {"lat": 29.7604, "lon": -95.3698},
-    "Austin": {"lat": 30.2672, "lon": -97.7431}
+    "Tehran-IR": {"lat": 35.6892, "lon": 51.3890},
+    "Mashhad-IR": {"lat": 36.2970, "lon": 59.6057},
+    "New York-USA": {"lat": 40.7128, "lon": -74.0060},
+    "Dallas-USA": {"lat": 32.7767, "lon": -96.7970},
+    "Houston-USA": {"lat": 29.7604, "lon": -95.3698},
+    "Austin-USA": {"lat": 30.2672, "lon": -97.7431}
+    "Bochum-DE" : {"lat":51.45972109228949,"lon": 7.234279823365569}
 }
 
 # --- تابع جدید برای تبدیل دما ---
