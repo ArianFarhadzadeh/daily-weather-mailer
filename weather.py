@@ -7,7 +7,6 @@ from email.header import Header
 import datetime
 
 # Email settings
-
 EMAIL_SENDER = os.environ["EMAIL_SENDER"]
 EMAIL_PASSWORD = os.environ["EMAIL_PASSWORD"]
 EMAIL_RECEIVER = os.environ["EMAIL_RECEIVER"]
@@ -24,16 +23,24 @@ CITIES = {
     "Austin": {"lat": 30.2672, "lon": -97.7431}
 }
 
+# --- تابع جدید برای تبدیل دما ---
+def celsius_to_fahrenheit(celsius):
+    """Converts Celsius temperature to Fahrenheit."""
+    return (celsius * 9/5) + 32
+
 def get_weather(city, lat, lon):
     """Fetch weather data for a city from Open-Meteo"""
     url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&current_weather=true"
     response = requests.get(url)
     if response.status_code == 200:
         data = response.json()
-        temp = data["current_weather"]["temperature"]
+        temp_celsius = data["current_weather"]["temperature"]
+        temp_fahrenheit = celsius_to_fahrenheit(temp_celsius) # تبدیل به فارنهایت
         weather_code = data["current_weather"]["weathercode"]
         description = weather_code_to_description(weather_code)
-        return f"{city}: Temperature: {temp}°C, Condition: {description}"
+        
+        # نمایش هر دو دما در خروجی
+        return f"{city}: Temperature: {temp_celsius}°C ({temp_fahrenheit:.1f}°F), Condition: {description}"
     else:
         return f"{city}: Error fetching data (status code {response.status_code})"
 
@@ -63,7 +70,7 @@ def weather_code_to_description(code):
         99: "Thunderstorm with heavy hail ⚡🌨️🧊"
     }
     return weather_codes.get(code, "Unknown ❓")
-    
+
 def send_email(weather_data):
     """Send email with weather information"""
     subject = f"Weather Report - {datetime.date.today()}"
