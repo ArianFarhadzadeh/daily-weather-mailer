@@ -33,26 +33,21 @@ You need to set the following environment variables before running the script:
 * `EMAIL_PASSWORD`: Your Gmail **App password** (this is ***not*** your regular Gmail password)
 * `EMAIL_RECEIVER`: The recipient's email address (e.g., `recipient.email@example.com`)
 
+### Setting Environment Variables (Before Running the Script):
+
 This you can do by edit `env.bat` for Windows, `env.sh` for Linux.
 
-And then run the batch file from the command line.
+And then execute the batch file from the command line.
 
 **Note!** For Linux you need to make it executable first, `chmod +x env.sh`.
 
-#### Generating a Gmail App Password:
+### To make the environment variables persistent:
 
-If you don't have an App password, follow these steps:
+https://www.howtogeek.com/787217/how-to-edit-environment-variables-on-windows-10-or-11/
 
-1.  Go to your [Google Account Security page](https://myaccount.google.com/security).
-2.  Under "How you sign in to Google," select **2-Step Verification**. If it's not enabled, you'll need to enable it first. You might need to sign in again.
-3.  Scroll down to "**App passwords**" and click on it.
-4.  Follow the instructions to generate a new app password. Make sure to **copy this password immediately** as you won't be able to see it again.
+https://linuxize.com/post/how-to-set-and-list-environment-variables-in-linux/
 
-#### Setting Environment Variables (Before Running the Script):
-
-**For Linux/macOS (Bash/Zsh terminal):**
-
-Edit `env.sh`
+### For Linux/macOS (Bash/Zsh terminal):
 
 ```bash
 export EMAIL_SENDER="your.email@gmail.com"
@@ -60,9 +55,7 @@ export EMAIL_PASSWORD="your_gmail_app_password" # Use the generated App Password
 export EMAIL_RECEIVER="recipient.email@example.com"
 ```
 
-**For Windows (Command Prompt):**
-
-Edit `env.bat`
+### For Windows (Command Prompt):
 
 ```cmd
 set EMAIL_SENDER="your.email@gmail.com"
@@ -70,7 +63,7 @@ set EMAIL_PASSWORD="your_gmail_app_password"
 set EMAIL_RECEIVER="recipient.email@example.com"
 ```
 
-**For Windows (PowerShell):**
+### For Windows (PowerShell):
 
 ```powershell
 $env:EMAIL_SENDER="your.email@gmail.com"
@@ -80,13 +73,16 @@ $env:EMAIL_RECEIVER="recipient.email@example.com"
 
 **Note:** These environment variables will only be active for the current terminal session. If you close the terminal or open a new one, you'll need to set them again.
 
-To make the environment variables persistent check out:
+## Generating a Gmail App Password:
 
-https://www.howtogeek.com/787217/how-to-edit-environment-variables-on-windows-10-or-11/
+If you don't have an App password, follow these steps:
 
-https://linuxize.com/post/how-to-set-and-list-environment-variables-in-linux/
+1.  Go to your [Google Account Security page](https://myaccount.google.com/security).
+2.  Under "How you sign in to Google," select **2-Step Verification**. If it's not enabled, you'll need to enable it first. You might need to sign in again.
+3.  Scroll down to "**App passwords**" and click on it.
+4.  Follow the instructions to generate a new app password. Make sure to **copy this password immediately** as you won't be able to see it again.
 
-### Customizing Cities
+## Customizing Cities
 
 You can customize the `CITIES` dictionary directly in your Python script (e.g., `main.py`) to add or remove cities by providing their `latitude` and `longitude`. You can find city coordinates using various online tools.
 
