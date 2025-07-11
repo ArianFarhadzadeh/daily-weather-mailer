@@ -3,8 +3,11 @@ import requests
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+from email import encoders
 from email.header import Header
 import datetime
+from gtts import gTTS
 
 # Email settings
 EMAIL_SENDER = os.environ["EMAIL_SENDER"]
@@ -72,8 +75,8 @@ def weather_code_to_description(code):
     }
     return weather_codes.get(code, "Unknown ❓")
 
-def send_email(weather_data):
-    """Send email with weather information"""
+def send_email(weather_data, audio_file=None):
+    """Send email with weather information and optional audio attachment"""
     subject = f"Weather Report - {datetime.date.today()}"
     body = "Today's weather report:\n\n" + "\n".join(weather_data)
 
@@ -83,6 +86,22 @@ def send_email(weather_data):
     msg["To"] = EMAIL_RECEIVER
     msg["Subject"] = Header(subject, "utf-8").encode()
     msg.attach(MIMEText(body, "plain", "utf-8"))
+
+    # Attach the audio file if it exists
+    if audio_file and os.path.exists(audio_file):
+        try:
+            with open(audio_file, "rb") as attachment:
+                part = MIMEBase("application", "octet-stream")
+                part.set_payload(attachment.read())
+            encoders.encode_base64(part)
+            part.add_header(
+                "Content-Disposition",
+                f"attachment; filename= {os.path.basename(audio_file)}",
+            )
+            msg.attach(part)
+            print(f"Attached audio file: {audio_file}")
+        except Exception as e:
+            print(f"Error attaching audio file: {e}")
 
     try:
         server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
@@ -100,8 +119,24 @@ def main():
     for city, coords in CITIES.items():
         weather_info = get_weather(city, coords["lat"], coords["lon"])
         weather_data.append(weather_info)
+
+    weather_report_text = "\n".join(weather_data)
+    audio_file = generate_tts_audio(weather_report_text)
     
-    send_email(weather_data)
+    # Pass both weather_data (for email body) and audio_file (for attachment)
+    send_email(weather_data, audio_file)
+
+def generate_tts_audio(text, filename="weather_report.mp3"):
+    """Generates TTS audio from text and saves it as an MP3 file."""
+    try:
+        print(f"Generating audio for: \"{text[:50]}...\"")
+        tts = gTTS(text=text, lang='en', slow=False)
+        tts.save(filename)
+        print(f"Audio saved as {filename}")
+        return filename
+    except Exception as e:
+        print(f"Error generating TTS audio: {e}")
+        return None
 
 if __name__ == "__main__":
     main()
