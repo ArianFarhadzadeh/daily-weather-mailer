@@ -27,7 +27,6 @@ CITIES = {
     "Bochum-DE" : {"lat":51.45972109228949,"lon": 7.234279823365569}
 }
 
-# --- تابع جدید برای تبدیل دما ---
 def celsius_to_fahrenheit(celsius):
     """Converts Celsius temperature to Fahrenheit."""
     return (celsius * 9/5) + 32
@@ -42,14 +41,14 @@ def get_weather(city, lat, lon):
         temp_fahrenheit = celsius_to_fahrenheit(temp_celsius) # تبدیل به فارنهایت
         weather_code = data["current_weather"]["weathercode"]
         description = weather_code_to_description(weather_code)
-        
-        # نمایش هر دو دما در خروجی
         return f"{city}: Temperature: {temp_celsius}°C ({temp_fahrenheit:.1f}°F), Condition: {description}"
     else:
         return f"{city}: Error fetching data (status code {response.status_code})"
 
 def weather_code_to_description(code):
     """Convert weather code to textual description"""
+    # Some WMO Weather Codes (WMO4677)
+    # https://epic.awi.de/id/eprint/29966/1/WMO2011h.pdf
     weather_codes = {
         0: "Clear sky ☀️",
         1: "Mainly clear 🌤️",
@@ -57,18 +56,18 @@ def weather_code_to_description(code):
         3: "Overcast ☁️",
         45: "Fog 🌫️",
         48: "Fog and freezing ❄️🌫️",
-        51: "Light drizzle 🌧️",
-        53: "Moderate drizzle 🌧️",
-        55: "Heavy drizzle 🌧️",
-        61: "Light rain ☔",
-        63: "Moderate rain ☔",
-        65: "Heavy rain ☔",
-        71: "Light snow 🌨️",
-        73: "Moderate snow 🌨️",
-        75: "Heavy snow 🌨️",
-        80: "Rain showers: light 🌧️",
-        81: "Rain showers: moderate 🌧️",
-        82: "Rain showers: violent ⛈️",
+        51: "Drizzle, light 🌧️",
+        53: "Drizzle, moderate 🌧️",
+        55: "Drizzle, heavy 🌧️",
+        61: "Rain, light ☔",
+        63: "Rain, moderate ☔",
+        65: "Rain, heavy ☔",
+        71: "Snow, light 🌨️",
+        73: "Snow, moderate 🌨️",
+        75: "Snow, heavy 🌨️",
+        80: "Rain showers, light 🌧️",
+        81: "Rain showers, moderate 🌧️",
+        82: "Rain showers, heavy ⛈️",
         95: "Thunderstorm ⚡⛈️",
         96: "Thunderstorm with hail ⚡🌨️🧊",
         99: "Thunderstorm with heavy hail ⚡🌨️🧊"
@@ -76,7 +75,7 @@ def weather_code_to_description(code):
     return weather_codes.get(code, "Unknown ❓")
 
 def send_email(weather_data, audio_file=None):
-    """Send email with weather information and optional audio attachment"""
+    """Send email with weather data and optional audio attachment"""
     subject = f"Weather Report - {datetime.date.today()}"
     body = "Today's weather report:\n\n" + "\n".join(weather_data)
 
