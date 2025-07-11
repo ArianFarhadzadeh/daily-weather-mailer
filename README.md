@@ -35,11 +35,15 @@ You need to set the following environment variables before running the script:
 
 ### Setting Environment Variables (Before Running the Script):
 
-This you can do by edit `env.bat` for Windows, `env.sh` for Linux.
+You can use the provided `env.sh` (for Linux/macOS) or `env.bat` (for Windows) as templates. **Do not commit your actual credentials to these files.** Instead, you can:
 
-And then execute the batch file from the command line.
+1.  **Copy the template:** Create a new file (e.g., `my_env.sh` or `my_env.bat`) from the template.
+2.  **Edit the copy:** Add your credentials to this new file.
+3.  **Source the file (Linux/macOS):** Before running the script, execute `source my_env.sh` in your terminal.
+4.  **Run the batch file (Windows):** Before running the script, execute `my_env.bat` in your command prompt.
+5.  **Ensure the copied file is in your `.gitignore`** to prevent accidental commits.
 
-**Note!** For Linux you need to make it executable first, `chmod +x env.sh`.
+Alternatively, you can set the environment variables directly in your terminal session:
 
 ### Set environments in Linux/macOS (Bash/Zsh terminal):
 
