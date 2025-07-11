@@ -80,6 +80,12 @@ $env:EMAIL_RECEIVER="recipient.email@example.com"
 
 **Note:** These environment variables will only be active for the current terminal session. If you close the terminal or open a new one, you'll need to set them again.
 
+To make the environment variables persistent check out:
+
+https://www.howtogeek.com/787217/how-to-edit-environment-variables-on-windows-10-or-11/
+
+https://linuxize.com/post/how-to-set-and-list-environment-variables-in-linux/
+
 ### Customizing Cities
 
 You can customize the `CITIES` dictionary directly in your Python script (e.g., `main.py`) to add or remove cities by providing their `latitude` and `longitude`. You can find city coordinates using various online tools.
