@@ -35,7 +35,9 @@ You need to set the following environment variables before running the script:
 
 This you can do by edit `env.bat` for Windows, `env.sh` for Linux.
 
-And then run the batch file from the command line (**Note!** For Linux you need to make it executable first, `chmod +x env.sh`).
+And then run the batch file from the command line.
+
+**Note!** For Linux you need to make it executable first, `chmod +x env.sh`.
 
 #### Generating a Gmail App Password:
 
@@ -49,7 +51,9 @@ If you don't have an App password, follow these steps:
 #### Setting Environment Variables (Before Running the Script):
 
 **For Linux/macOS (Bash/Zsh terminal):**
+
 Edit `env.sh`
+
 ```bash
 export EMAIL_SENDER="your.email@gmail.com"
 export EMAIL_PASSWORD="your_gmail_app_password" # Use the generated App Password
@@ -57,7 +61,9 @@ export EMAIL_RECEIVER="recipient.email@example.com"
 ```
 
 **For Windows (Command Prompt):**
+
 Edit `env.bat`
+
 ```cmd
 set EMAIL_SENDER="your.email@gmail.com"
 set EMAIL_PASSWORD="your_gmail_app_password"
