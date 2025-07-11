@@ -41,13 +41,7 @@ And then execute the batch file from the command line.
 
 **Note!** For Linux you need to make it executable first, `chmod +x env.sh`.
 
-### To make the environment variables persistent:
-
-https://www.howtogeek.com/787217/how-to-edit-environment-variables-on-windows-10-or-11/
-
-https://linuxize.com/post/how-to-set-and-list-environment-variables-in-linux/
-
-### For Linux/macOS (Bash/Zsh terminal):
+### Set environments in Linux/macOS (Bash/Zsh terminal):
 
 ```bash
 export EMAIL_SENDER="your.email@gmail.com"
@@ -55,7 +49,7 @@ export EMAIL_PASSWORD="your_gmail_app_password" # Use the generated App Password
 export EMAIL_RECEIVER="recipient.email@example.com"
 ```
 
-### For Windows (Command Prompt):
+### Set environments in Windows (Command Prompt):
 
 ```cmd
 set EMAIL_SENDER="your.email@gmail.com"
@@ -63,7 +57,7 @@ set EMAIL_PASSWORD="your_gmail_app_password"
 set EMAIL_RECEIVER="recipient.email@example.com"
 ```
 
-### For Windows (PowerShell):
+### Set environments in Windows (PowerShell):
 
 ```powershell
 $env:EMAIL_SENDER="your.email@gmail.com"
@@ -72,6 +66,12 @@ $env:EMAIL_RECEIVER="recipient.email@example.com"
 ```
 
 **Note:** These environment variables will only be active for the current terminal session. If you close the terminal or open a new one, you'll need to set them again.
+
+### To make the environment variables persistent:
+
+https://www.howtogeek.com/787217/how-to-edit-environment-variables-on-windows-10-or-11/
+
+https://linuxize.com/post/how-to-set-and-list-environment-variables-in-linux/
 
 ## Generating a Gmail App Password:
 
