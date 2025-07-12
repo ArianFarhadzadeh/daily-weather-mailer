@@ -8,6 +8,7 @@ from email import encoders
 from email.header import Header
 import datetime
 from gtts import gTTS
+import json # Added this line
 
 # Email settings
 EMAIL_SENDER = os.environ["EMAIL_SENDER"]
@@ -16,16 +17,21 @@ EMAIL_RECEIVER = os.environ["EMAIL_RECEIVER"]
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
 
-# City coordinates (lat, lon)
-CITIES = {
-    "Tehran-IR": {"lat": 35.6892, "lon": 51.3890},
-    "Mashhad-IR": {"lat": 36.2970, "lon": 59.6057},
-    "New York-USA": {"lat": 40.7128, "lon": -74.0060},
-    "Dallas-USA": {"lat": 32.7767, "lon": -96.7970},
-    "Houston-USA": {"lat": 29.7604, "lon": -95.3698},
-    "Austin-USA": {"lat": 30.2672, "lon": -97.7431},
-    "Bochum-DE" : {"lat":51.45972109228949,"lon": 7.234279823365569}
-}
+# Load cities from JSON file
+def load_cities_from_json(filename="Locations.json"):
+    try:
+        with open(filename, 'r', encoding='utf-8') as f:
+            cities_data = json.load(f)
+        print(f"Cities loaded from {filename}")
+        return cities_data
+    except FileNotFoundError:
+        print(f"Error: {filename} not found. Please create the JSON file with city data.")
+        return {}
+    except json.JSONDecodeError:
+        print(f"Error: Could not decode JSON from {filename}. Please check the file format.")
+        return {}
+
+CITIES = load_cities_from_json() # Calling the function to load cities
 
 def celsius_to_fahrenheit(celsius):
     """Converts Celsius temperature to Fahrenheit."""
@@ -38,7 +44,7 @@ def get_weather(city, lat, lon):
     if response.status_code == 200:
         data = response.json()
         temp_celsius = data["current_weather"]["temperature"]
-        temp_fahrenheit = celsius_to_fahrenheit(temp_celsius) # تبدیل به فارنهایت
+        temp_fahrenheit = celsius_to_fahrenheit(temp_celsius) # Convert to Fahrenheit
         weather_code = data["current_weather"]["weathercode"]
         description = weather_code_to_description(weather_code)
         return f"{city}: Temperature: {temp_celsius}°C ({temp_fahrenheit:.1f}°F), Condition: {description}"
@@ -114,6 +120,10 @@ def send_email(weather_data, audio_file=None):
 
 def main():
     """Main function to fetch and send weather data"""
+    if not CITIES: # Added this condition to check if CITIES is empty
+        print("No cities found to process. Exiting.")
+        return
+
     weather_data = []
     for city, coords in CITIES.items():
         weather_info = get_weather(city, coords["lat"], coords["lon"])
