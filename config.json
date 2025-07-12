@@ -1,0 +1,7 @@
+{
+    "email_sender": "your_email@example.com",
+    "email_password": "your_password",
+    "email_receiver": "receiver_email@example.com",
+    "smtp_server": "smtp.gmail.com",
+    "smtp_port": 587
+}
