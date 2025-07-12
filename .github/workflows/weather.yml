@@ -22,9 +22,5 @@ jobs:
         run: pip install requests gtts
 
       - name: Run weather script
-        env:
-          EMAIL_SENDER: ${{ secrets.EMAIL_SENDER }}
-          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
-          EMAIL_RECEIVER: ${{ secrets.EMAIL_RECEIVER }}
         run: |
-          python3 weather.py
+          python3 weather_v2.py

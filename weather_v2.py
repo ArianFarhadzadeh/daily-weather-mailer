@@ -8,14 +8,28 @@ from email import encoders
 from email.header import Header
 import datetime
 from gtts import gTTS
-import json # Added this line
+import json
 
-# Email settings
-EMAIL_SENDER = os.environ["EMAIL_SENDER"]
-EMAIL_PASSWORD = os.environ["EMAIL_PASSWORD"]
-EMAIL_RECEIVER = os.environ["EMAIL_RECEIVER"]
-SMTP_SERVER = "smtp.gmail.com"
-SMTP_PORT = 587
+def load_config(filename="config.json"):
+    """Load configuration from a JSON file."""
+    try:
+        with open(filename, 'r') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        print(f"Error: {filename} not found.")
+        return {}
+    except json.JSONDecodeError:
+        print(f"Error: Could not decode JSON from {filename}.")
+        return {}
+
+config = load_config()
+
+# Email settings from config
+EMAIL_SENDER = config.get("email_sender")
+EMAIL_PASSWORD = config.get("email_password")
+EMAIL_RECEIVER = config.get("email_receiver")
+SMTP_SERVER = config.get("smtp_server", "smtp.gmail.com")
+SMTP_PORT = config.get("smtp_port", 587)
 
 # Load cities from JSON file
 def load_cities_from_json(filename="Locations.json"):
@@ -31,7 +45,7 @@ def load_cities_from_json(filename="Locations.json"):
         print(f"Error: Could not decode JSON from {filename}. Please check the file format.")
         return {}
 
-CITIES = load_cities_from_json() # Calling the function to load cities
+CITIES = load_cities_from_json()
 
 def celsius_to_fahrenheit(celsius):
     """Converts Celsius temperature to Fahrenheit."""
@@ -109,7 +123,7 @@ def send_email(weather_data, audio_file=None):
 
 def main():
     """Main function to fetch and send weather data"""
-    if not CITIES: # Added this condition to check if CITIES is empty
+    if not CITIES:
         print("No cities found to process. Exiting.")
         return
 
@@ -121,7 +135,6 @@ def main():
     weather_report_text = "\n".join(weather_data)
     audio_file = generate_tts_audio(weather_report_text)
     
-    # Pass both weather_data (for email body) and audio_file (for attachment)
     send_email(weather_data, audio_file)
 
 def generate_tts_audio(text, filename="weather_report.mp3"):
