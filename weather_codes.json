@@ -1,0 +1,23 @@
+{
+    "0": "Clear sky ☀️",
+    "1": "Mainly clear 🌤️",
+    "2": "Partly cloudy ⛅",
+    "3": "Overcast ☁️",
+    "45": "Fog 🌫️",
+    "48": "Fog and freezing ❄️🌫️",
+    "51": "Drizzle, light 🌧️",
+    "53": "Drizzle, moderate 🌧️",
+    "55": "Drizzle, heavy 🌧️",
+    "61": "Rain, light ☔",
+    "63": "Rain, moderate ☔",
+    "65": "Rain, heavy ☔",
+    "71": "Snow, light 🌨️",
+    "73": "Snow, moderate 🌨️",
+    "75": "Snow, heavy 🌨️",
+    "80": "Rain showers, light 🌧️",
+    "81": "Rain showers, moderate 🌧️",
+    "82": "Rain showers, heavy ⛈️",
+    "95": "Thunderstorm ⚡⛈️",
+    "96": "Thunderstorm with hail ⚡🌨️🧊",
+    "99": "Thunderstorm with heavy hail ⚡🌨️🧊"
+}

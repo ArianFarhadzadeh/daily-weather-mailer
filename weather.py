@@ -51,34 +51,23 @@ def get_weather(city, lat, lon):
     else:
         return f"{city}: Error fetching data (status code {response.status_code})"
 
+def load_weather_codes(filename="weather_codes.json"):
+    """Load weather codes from a JSON file."""
+    try:
+        with open(filename, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        print(f"Error: {filename} not found.")
+        return {}
+    except json.JSONDecodeError:
+        print(f"Error: Could not decode JSON from {filename}.")
+        return {}
+
+WEATHER_CODES = load_weather_codes()
+
 def weather_code_to_description(code):
     """Convert weather code to textual description"""
-    # Some WMO Weather Codes (WMO4677)
-    # https://epic.awi.de/id/eprint/29966/1/WMO2011h.pdf
-    weather_codes = {
-        0: "Clear sky ☀️",
-        1: "Mainly clear 🌤️",
-        2: "Partly cloudy ⛅",
-        3: "Overcast ☁️",
-        45: "Fog 🌫️",
-        48: "Fog and freezing ❄️🌫️",
-        51: "Drizzle, light 🌧️",
-        53: "Drizzle, moderate 🌧️",
-        55: "Drizzle, heavy 🌧️",
-        61: "Rain, light ☔",
-        63: "Rain, moderate ☔",
-        65: "Rain, heavy ☔",
-        71: "Snow, light 🌨️",
-        73: "Snow, moderate 🌨️",
-        75: "Snow, heavy 🌨️",
-        80: "Rain showers, light 🌧️",
-        81: "Rain showers, moderate 🌧️",
-        82: "Rain showers, heavy ⛈️",
-        95: "Thunderstorm ⚡⛈️",
-        96: "Thunderstorm with hail ⚡🌨️🧊",
-        99: "Thunderstorm with heavy hail ⚡🌨️🧊"
-    }
-    return weather_codes.get(code, "Unknown ❓")
+    return WEATHER_CODES.get(str(code), "Unknown ❓")
 
 def send_email(weather_data, audio_file=None):
     """Send email with weather data and optional audio attachment"""

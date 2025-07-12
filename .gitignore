@@ -1,1 +1,4 @@
 *.mp3
+env.bat
+env.sh
+my_env.*
