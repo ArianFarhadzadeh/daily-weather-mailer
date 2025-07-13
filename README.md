@@ -51,7 +51,7 @@ Rename `env.sh.template` to `env.sh` (for Linux/macOS) or `env.bat.template` to 
 
 Instead of hardcoding cities in the Python script, you can now manage your city list using a `locations.json` file. This allows for easy addition, modification, or removal of cities without changing the main script.
 
-Create a file named `locations.json` (get inspiration from the template file `locations.template`)  in the same directory as `weather.py` and populate it with your desired cities and their coordinates.
+Create a file named `locations.json` (get inspiration from the template file `locations.json.template`)  in the same directory as `weather.py` and populate it with your desired cities and their coordinates.
 
 ---
 
