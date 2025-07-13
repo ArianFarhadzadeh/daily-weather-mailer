@@ -44,7 +44,7 @@ You need to set the following environment variables before running the script:
 *   `EMAIL_PASSWORD`: Your Gmail App password (this is not your regular Gmail password)
 *   `EMAIL_RECEIVER`: The recipient's email address (e.g., `recipient.email@example.com`)
 
-Rename `env.sh.template` to `env.sh` (for Linux/macOS) or `env.bat.template` to `env.bat` (for Windows) and add your settings to `env.sh` or `env.bat.  **Do not commit your actual credentials to the *.template files.**
+Rename `env.sh.template` to `env.sh` (for Linux/macOS) or `env.bat.template` to `env.bat` (for Windows) and add your settings to `env.sh` or `env.bat`.  **Do not commit your actual credentials to the *.template files.**
 
 
 ### Customizing Cities via JSON
