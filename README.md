@@ -44,13 +44,14 @@ You need to set the following environment variables before running the script:
 *   `EMAIL_PASSWORD`: Your Gmail App password (this is not your regular Gmail password)
 *   `EMAIL_RECEIVER`: The recipient's email address (e.g., `recipient.email@example.com`)
 
-You can use the provided `env.sh` (for Linux/macOS) or `env.bat` (for Windows) as templates. **Do not commit your actual credentials to these files.**
+Rename `env.sh.template` to `env.sh` (for Linux/macOS) or `env.bat.template` to `env.bat` (for Windows) and add your settings to `env.sh` or `env.bat`.  **Do not commit your actual credentials to the *.template files.**
+
 
 ### Customizing Cities via JSON
 
-Instead of hardcoding cities in the Python script, you can now manage your city list using a `Locations.json` file. This allows for easy addition, modification, or removal of cities without changing the main script.
+Instead of hardcoding cities in the Python script, you can now manage your city list using a `locations.json` file. This allows for easy addition, modification, or removal of cities without changing the main script.
 
-Create a file named `Locations.json` in the same directory as `weather.py` and populate it with your desired cities and their coordinates.
+Create a file named `locations.json` in the same directory as `weather.py` and populate it with your desired cities and their coordinates.  Get inspiration from the template file `locations.json.template`.
 
 ---
 
@@ -79,5 +80,3 @@ Upon successful execution, you should see "Email sent successfully." in your ter
 ## 🤝 Contributing
 
 Contributions are welcome! If you have suggestions for improvements or new features, feel free to open an issue or submit a pull request.
-
----

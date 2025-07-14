@@ -1,4 +1,6 @@
 *.mp3
-env.bat
-env.sh
 my_env.*
+/locations.json
+/config.json
+/env.bat
+/env.sh
