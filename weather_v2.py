@@ -10,26 +10,12 @@ import datetime
 from gtts import gTTS
 import json
 
-def load_config(filename="config.json"):
-    """Load configuration from a JSON file."""
-    try:
-        with open(filename, 'r') as f:
-            return json.load(f)
-    except FileNotFoundError:
-        print(f"Error: {filename} not found.")
-        return {}
-    except json.JSONDecodeError:
-        print(f"Error: Could not decode JSON from {filename}.")
-        return {}
-
-config = load_config()
-
-# Email settings from config
-EMAIL_SENDER = config.get("email_sender")
-EMAIL_PASSWORD = config.get("email_password")
-EMAIL_RECEIVER = config.get("email_receiver")
-SMTP_SERVER = config.get("smtp_server", "smtp.gmail.com")
-SMTP_PORT = config.get("smtp_port", 587)
+# Email settings from environment variables
+EMAIL_SENDER = os.environ.get("EMAIL_SENDER")
+EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD")
+EMAIL_RECEIVER = os.environ.get("EMAIL_RECEIVER")
+SMTP_SERVER = os.environ.get("SMTP_SERVER", "smtp.gmail.com")
+SMTP_PORT = int(os.environ.get("SMTP_PORT", 587))
 
 # Load cities from JSON file
 def load_cities_from_json(filename="Locations.json"):
@@ -85,6 +71,10 @@ def weather_code_to_description(code):
 
 def send_email(weather_data, audio_file=None):
     """Send email with weather data and optional audio attachment"""
+    if not all([EMAIL_SENDER, EMAIL_PASSWORD, EMAIL_RECEIVER]):
+        print("Error: Email credentials are not set. Please check your environment variables.")
+        return
+
     subject = f"Weather Report - {datetime.date.today()}"
     body = "Today's weather report:\n\n" + "\n".join(weather_data)
 
@@ -112,14 +102,19 @@ def send_email(weather_data, audio_file=None):
             print(f"Error attaching audio file: {e}")
 
     try:
+        print("Connecting to SMTP server...")
         server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
         server.starttls()
+        print("Logging in to email server...")
         server.login(EMAIL_SENDER, EMAIL_PASSWORD)
+        print("Sending email...")
         server.sendmail(EMAIL_SENDER, EMAIL_RECEIVER, msg.as_string())
         server.quit()
         print("Email sent successfully.")
+    except smtplib.SMTPAuthenticationError as e:
+        print(f"Error sending email: SMTP Authentication Error. Please check your email and password. Details: {e}")
     except Exception as e:
-        print(f"Error sending email: {e}")
+        print(f"An unexpected error occurred while sending the email: {e}")
 
 def main():
     """Main function to fetch and send weather data"""
